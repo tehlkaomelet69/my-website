@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Web Page Full of Love – Just for You</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+    body {
+      text-align: center;
+      background-color: #ffd1dc;
+      font-family: 'Dancing Script', cursive;
+      font-style: italic;
+      padding: 20px;
+    }
+
+    .container {
+      border: 5px solid #b30000;
+      border-radius: 15px;
+      padding: 20px;
+      display: inline-block;
+      background: white;
+      margin-top: 50px;
+    }
+
+    .image-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .image-container img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid #b30000;
+    }
+
+    h1 {
+      color: #b30000;
+      font-size: 35px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .btn {
+      font-size: 20px;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 10px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .yes-btn {
+      background-color: #ff4d4d;
+    }
+
+    .yes-btn:hover {
+      background-color: #cc0000;
+    }
+
+    .no-btn {
+      background-color: #999;
+    }
+
+    .no-btn:hover {
+      background-color: #666;
+    }
+
+    #message {
+      font-size: 22px;
+      margin-top: 20px;
+      color: black;
+      display: none;
+      font-weight: bold;
+    }
+
+    /* Hide default audio controls */
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="image-container">
+      <img src="ROZA.jpeg" alt="Roza Image" onerror="this.onerror=null; this.src='default.jpg';">
+    </div>
+
+    <h1>Will You Be Mine Roza?🤍 </h1>
+
+    <button class="btn yes-btn" onclick="showMessage('yes')">Yes 😊</button>
+    <button class="btn no-btn" onclick="showMessage('no')">No 😢</button>
+
+    <p id="message"></p>
+  </div>
+
+  <!-- Background Music (Loop) -->
+  <audio id="bg-music">
+    <source src="yes.mpeg" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Sad Music (Will play only when No is clicked) -->
+  <audio id="sad-music">
+    <source src="no.mpeg" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let happyMusic = document.getElementById("bg-music");
+        let sadMusic = document.getElementById("sad-music");
+
+        function showMessage(response) {
+            let message = document.getElementById("message");
+
+            // Stop both music first to prevent mixing
+            happyMusic.pause();
+            sadMusic.pause();
+            happyMusic.currentTime = 0; 
+            sadMusic.currentTime = 0;
+
+            if (response === 'yes') {
+                message.innerHTML = 'Thank you for making me the happiest person in the world by accepting my proposal✨<br><br><b></b>';
+                message.style.color = "black";
+                message.style.fontWeight = "bold";
+                happyMusic.play(); // Play happy song
+            } else {
+                message.innerHTML = "No keh diya? Koi baat nahi… main aaj bhi wahi hoon, jo tumhare ‘yes’ ka intezar kar raha tha.🤌🏻";
+                message.style.color = "#333";
+                message.style.fontWeight = "bold";
+                sadMusic.play(); // Play sad song
+            }
+            message.style.display = "block";
+        }
+
+        // Make showMessage function available globally
+        window.showMessage = showMessage;
+    });
+  </script>
+
+</body>
+
+</html>
